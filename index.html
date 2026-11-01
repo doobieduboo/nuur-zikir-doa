@@ -45,7 +45,7 @@ body.dark{--bg:#061c19;--surface:#112823;--surface2:#193630;--ink:#f1f2e7;--mute
     {name:'Tahmid',target:33,arab:'الْحَمْدُ لِلَّهِ',latin:'Alhamdulillah',meaning:'Segala puji bagi Allah.',hint:'HR. Muslim no. 597'},
     {name:'Takbir',target:33,arab:'اللَّهُ أَكْبَرُ',latin:'Allahu Akbar',meaning:'Allah Mahabesar.',hint:'HR. Muslim no. 597'},
     {name:'Kalimat tauhid',target:1,arab:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',latin:"Laa ilaaha illallaahu wahdahu laa syariika lah, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli syai'in qadiir.",meaning:'Tiada Tuhan yang berhak disembah selain Allah, Yang Maha Esa, tiada sekutu bagi-Nya.',hint:'HR. Muslim no. 597'},
-    {name:'Pujian dan selawat',target:1,arab:'',latin:'Segala puji bagi Allah, Tuhan semesta alam. Ya Allah, limpahkanlah selawat dan salam kepada Nabi Muhammad ﷺ.',meaning:'Bacaan pembuka untuk doa pribadi, bukan zikir berjumlah khusus.',hint:'Susunan doa pribadi'}
+    {name:'Pujian dan selawat',target:1,arab:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ\nاللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ',latin:'Alhamdulillaahi rabbil-‘aalamiin.\nAllahumma shalli ‘alaa Muhammadin wa ‘alaa aali Muhammad.',meaning:'Segala puji bagi Allah, Tuhan seluruh alam. Ya Allah, limpahkanlah selawat kepada Nabi Muhammad dan keluarga beliau. Angka 1 di sini hanya penanda tahap aplikasi, bukan ketentuan jumlah bacaan.',hint:'Pujian: QS. Al-Fatihah: 2. Selawat pendek; bagian dari selawat yang lebih panjang dalam hadis.'}
   ];
   const dua = [
     {title:'Pembuka',text:'Bismillahirrahmanirrahim.\n\nSegala puji bagi-Mu, ya Allah. Limpahkanlah selawat dan salam kepada Nabi Muhammad ﷺ.'},
@@ -113,7 +113,7 @@ body.dark{--bg:#061c19;--surface:#112823;--surface2:#193630;--ink:#f1f2e7;--mute
     return `<div class="content"><div class="select-row"><div><div class="eyebrow">Sesi zikir</div><div class="minor">Pilih salat yang baru selesai</div></div><select id="prayer-select" aria-label="Pilih salat">${prayers.map(p=>`<option ${prayer===p?'selected':''}>${p}</option>`).join('')}</select></div>
       <div class="counter-panel"><div class="step-overline">Tahap ${stepIdx+1} dari ${zikr.length} · ${prayer}</div><h2 class="counter-title">${z.name}</h2>
       ${data.prefs.showArabic && z.arab ? `<div class="arabic counter-arabic" lang="ar">${z.arab}</div>`:''}
-      ${data.prefs.showLatin ? `<p class="counter-latin">${z.latin}</p>`:''}<p class="counter-meaning">${z.meaning}</p>
+      ${data.prefs.showLatin ? `<p class="counter-latin">${z.latin.replace(/\\n/g, '<br>')}</p>`:''}<p class="counter-meaning">${z.meaning}</p>
       <div class="ring" style="--pct:${pct}%"><div class="ring-inner"><button class="tap-counter" data-action="increment" aria-label="Tambah satu bacaan ${z.name}" ${c>=z.target?'disabled':''}><span class="counter-value">${c}</span><span class="counter-target">dari ${z.target} kali</span><span class="tap-label">${c>=z.target?'Selesai ✓':'Ketuk untuk hitung'}</span></button></div></div>
       <div class="control-row"><button class="ghost-btn" data-action="decrement" ${c===0?'disabled':''}>${svg('minus',16)} Kurangi</button><button class="ghost-btn" data-action="resetstep">${svg('rotate',16)} Ulang tahap</button></div>
       </div>
